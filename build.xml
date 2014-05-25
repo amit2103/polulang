@@ -1,0 +1,41 @@
+
+<project name="Cymbol" default="jar" basedir=".">
+
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="antlr4.jar" value="antlr-3.2.jar" />
+	
+	<path id="classpath">
+        <pathelement location="${antlr4.jar}"/>
+    </path>
+	
+	<target name="jar" depends="clean, compile">
+	    <mkdir dir="${build.dir}"/>
+    
+        <jar jarfile="${basedir}/polulang.jar">
+            <fileset dir="${build.dir}/classes" includes="**/*.class"/>
+        	
+        	<zipfileset src="${antlr4.jar}"/>
+            <manifest>
+                <attribute name="Main-Class" value="InterPolu"/>
+            </manifest>
+        </jar>
+    </target>
+	
+	<target name="clean">
+	    <delete dir="${build.dir}"/>
+    </target>
+	
+    <target name="compile">
+        <mkdir dir="${build.dir}/classes"/>
+        <javac
+        	srcdir="${basedir}/src"
+            destdir="${build.dir}/classes"
+        	source="1.5"
+            target="1.5"
+            debug="true"
+            excludes="cymbol/test/**">
+                    <classpath refid="classpath"/>
+        </javac>
+    </target>
+	
+</project>
