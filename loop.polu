@@ -2,5 +2,5 @@ n = 100000000
 i = 0
 while i<n:
         i = i + 1
-.
+end
 print "looped "+n+" times."
